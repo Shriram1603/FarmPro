@@ -1,4 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
+import { Fertilizers } from 'data/Fertilizers';
 import React, { useState } from 'react';
 import {
   View,
@@ -62,7 +63,7 @@ const BuyProduct = () => {
   const renderProductItem = ({ item }) => (
     <ScrollView>
       <TouchableOpacity style={styles.productItemContainer} onPress={() => navigate('ProductDetails')}>
-        <Image source={{ uri: item.imageUrl }} style={styles.productImage} />
+        <Image source={{ uri: item.image }} style={styles.productImage} />
         <Text style={styles.productName}>{item.name}</Text>
         <Text style={styles.productPrice}>{item.price}</Text>
       </TouchableOpacity>
@@ -73,7 +74,7 @@ const BuyProduct = () => {
     <View style={styles.container}>
       <Text style={styles.heading}>Products</Text>
       <FlatList
-        data={products}
+        data={Fertilizers}
         keyExtractor={item => item.id}
         renderItem={renderProductItem}
         numColumns={2}
@@ -106,8 +107,6 @@ const styles = StyleSheet.create({
   productItemContainer: {
     flex: 1,
     borderRadius: 8,
-    // backgroundColor: '#f0f0f0',
-    // padding: 10,
     margin: 8,
   },
 

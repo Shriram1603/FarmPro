@@ -11,7 +11,6 @@ import {
   Pressable,
 } from 'react-native';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const SellPage = () => {
   const [imageUri, setImageUri] = useState('');
@@ -26,7 +25,7 @@ const SellPage = () => {
     return (
       <Pressable style={styles.boxContainer} onPress={onPress}>
         <Image source={ImageUrl} style={styles.boximg} />
-        <Text>{BoxText}</Text>
+        <Text style={{color:'black',fontFamily:'Poppins'}}>{BoxText}</Text>
       </Pressable>
     );
   });
@@ -128,8 +127,8 @@ const styles = StyleSheet.create({
   boxContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 20,
-    paddingHorizontal: 50,
+    marginVertical: 20,
+    paddingHorizontal: 20,
   },
   boximg: {
     height: 28,

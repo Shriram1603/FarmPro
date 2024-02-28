@@ -25,7 +25,7 @@ const Analytics = () => {
       value: 16, //put the val of used ferti val here
       color: '#93FCF8',
       gradientCenterColor: '#3BE9DE',
-    },
+    },  
   ];
 
   return (
