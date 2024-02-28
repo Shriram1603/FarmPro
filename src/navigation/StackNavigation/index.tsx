@@ -14,7 +14,7 @@ import CropRotation from 'container/CropRotation';
 const StackNavigator = () => {
     const Stack = createStackNavigator();
   return (
-    <Stack.Navigator screenOptions={{headerShown:false}} initialRouteName='CropRotation'>
+    <Stack.Navigator screenOptions={{headerShown:false}} initialRouteName='Cart'>
         <Stack.Screen name='Home' component={BuyProduct} />
         <Stack.Screen name='BuyProduct' component={BuyProduct} />
         <Stack.Screen name='SellProduct' component={SellProduct} />

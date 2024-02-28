@@ -31,7 +31,7 @@ const ProductItem = ({item, onAddToCart}) => {
         <TouchableOpacity
           onPress={() => {
             onAddToCart(item, quantity);
-            setQuantity(0);
+            setQuantity(quantity+1);
           }}
           style={styles.counterButton}>
           <Text style={styles.counterButtonText}>+</Text>
@@ -51,14 +51,14 @@ const Cart = () => {
         'https://ecommercephotographyindia.com/assets/img/gallery/cosmetics-turquoise-bg.jpg',
     },
     {
-      id: '1',
+      id: '2',
       name: 'Product 1',
       price: '$20',
       imageUrl:
         'https://ecommercephotographyindia.com/assets/img/gallery/cosmetics-turquoise-bg.jpg',
     },
     {
-      id: '1',
+      id: '3',
       name: 'Product 1',
       price: '$20',
       imageUrl:
@@ -83,9 +83,10 @@ const Cart = () => {
         data={products}
         keyExtractor={item => item.id}
         renderItem={renderProductItem}
+        style={{color:'black'}}
       />
       <TouchableOpacity style={styles.uploadButton}>
-        <Text style={styles.uploadButtonText}>Upload</Text>
+        <Text style={styles.uploadButtonText}>Place Order</Text>
       </TouchableOpacity>
     </View>
   );
@@ -95,6 +96,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
+    backgroundColor:'white'
   },
   heading: {
     fontSize: 20,
@@ -129,9 +131,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 4,
     color: 'black',
+    fontFamily:'Poppins'
   },
   productPrice: {
     fontSize: 14,
+    color:'black',
+    fontFamily:'Poppins'
   },
   counterContainer: {
     flexDirection: 'row',
@@ -146,6 +151,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginHorizontal: 10,
+    color:'black',
+    fontFamily:'Poppins'
   },
   counterButtonText: {
     fontSize: 14,
@@ -162,11 +169,13 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 10,
     alignItems: 'center',
+    
   },
   uploadButtonText: {
-    color: 'black',
+    color: 'white',
     fontSize: 18,
     fontWeight: 'bold',
+    fontFamily:'Poppins'
   },
 });
 
