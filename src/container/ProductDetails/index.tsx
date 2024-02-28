@@ -11,7 +11,7 @@ import Stars from 'react-native-stars';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import BtnComponent from 'components/BtnComponent';
 
-const ProductDetails = ({imageUrl}) => {
+const ProductDetails = ({name,price,imageUrl,details}) => {
   const [stars, setStars] = useState(0);
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>

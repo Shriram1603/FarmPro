@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import {
   View,
@@ -56,9 +57,11 @@ const BuyProduct = () => {
     // Add more products as needed
   ]);
 
+  const {navigate} = useNavigation();
+
   const renderProductItem = ({ item }) => (
     <ScrollView>
-      <TouchableOpacity style={styles.productItemContainer}>
+      <TouchableOpacity style={styles.productItemContainer} onPress={() => navigate('ProductDetails')}>
         <Image source={{ uri: item.imageUrl }} style={styles.productImage} />
         <Text style={styles.productName}>{item.name}</Text>
         <Text style={styles.productPrice}>{item.price}</Text>
@@ -75,6 +78,7 @@ const BuyProduct = () => {
         renderItem={renderProductItem}
         numColumns={2}
         columnWrapperStyle={styles.productList}
+
       />
     </View>
   );

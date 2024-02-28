@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "846233140364",
+    "project_id": "farmpro-d3fd6",
+    "storage_bucket": "farmpro-d3fd6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:846233140364:android:c40f55d44594970a314fa9",
+        "android_client_info": {
+          "package_name": "com.farmpro"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8tWUT5vZoGwQbCx6xYUCZEvLVr9UJqFw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
