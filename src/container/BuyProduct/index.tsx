@@ -9,7 +9,7 @@ import {
   ScrollView,
 } from 'react-native';
 
-const SellProduct = () => {
+const BuyProduct = () => {
   const [products, setProducts] = useState([
     {
       id: '1',
@@ -130,4 +130,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SellProduct;
+export default BuyProduct;

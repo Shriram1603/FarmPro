@@ -9,6 +9,31 @@ const CropRecommendation = () => {
   const [phosphorus, setPhosphorus] = useState(0);
   const [nitrogen, setNitrogen] = useState(0);
 
+  const pushMetrics = async() => {
+    await fetch('http://192.168.117.18:8080/recommend_fertilizer',{
+        method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        temperature:temperature,
+        humidity:humidity,
+        potassium:potassium,
+        phosphorous:phosphorus,
+        nitrogen:nitrogen,
+        crop_type:19,
+        soil_type:5,
+        moisture:70
+      }),
+    })
+      .then(res => res.json())
+      .then(resp => {
+       console.log(resp)
+      
+    })
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>Crop Recommendation</Text>
@@ -73,7 +98,7 @@ const CropRecommendation = () => {
         />
       </View>
 
-      <TouchableOpacity style={styles.uploadButton}>
+      <TouchableOpacity style={styles.uploadButton} onPress={pushMetrics}>
         <Text style={styles.uploadButtonText}>Submit</Text>
       </TouchableOpacity>
     </View>
@@ -107,6 +132,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: 'center',
     marginTop: 20,
+    color:'white'
   },
   uploadButtonText: {
     color: 'black',

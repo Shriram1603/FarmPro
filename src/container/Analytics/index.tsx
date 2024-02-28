@@ -21,16 +21,7 @@ const Analytics = () => {
   return (
     <View style={styles.container}>
     <Text style={styles.heading}>Farm Pro</Text>
-    <BarChart
-//   style={graphStyle}
-  data={data}
-  width={100}
-  height={220}
-  yAxisLabel="$"
-//   chartConfig={chartConfig}
-flatColor='black'
-  verticalLabelRotation={30}
-/></View>
+    </View>
     
   
   );

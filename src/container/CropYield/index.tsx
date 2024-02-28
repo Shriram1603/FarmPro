@@ -11,7 +11,7 @@ import {
 import Textipcmp from 'components/TextIpcmp';
 import BtnComponent from 'components/BtnComponent';
 
-const CropRotation = () => {
+const CropYield = () => {
   const state_indices = {
     Assam: 1,
     Karnataka: 2,
@@ -125,7 +125,7 @@ const CropRotation = () => {
 
   return (
     <ScrollView style={{flex: 1, backgroundColor: 'white'}}>
-      <Topbar title={'CropRotation'} />
+      <Topbar title={'CropYield'} />
       
         <Text
           style={{
@@ -237,4 +237,4 @@ const CropRotation = () => {
   );
 };
 
-export default CropRotation;
+export default CropYield;
