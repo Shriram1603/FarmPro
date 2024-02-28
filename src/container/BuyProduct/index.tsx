@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -56,10 +56,10 @@ const SellProduct = () => {
     // Add more products as needed
   ]);
 
-  const renderProductItem = ({item}) => (
+  const renderProductItem = ({ item }) => (
     <ScrollView>
       <TouchableOpacity style={styles.productItemContainer}>
-        <Image source={{uri: item.imageUrl}} style={styles.productImage} />
+        <Image source={{ uri: item.imageUrl }} style={styles.productImage} />
         <Text style={styles.productName}>{item.name}</Text>
         <Text style={styles.productPrice}>{item.price}</Text>
       </TouchableOpacity>
@@ -92,6 +92,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     textAlign: 'center',
     color: 'black',
+    fontFamily: 'Sen-ExtraBold'
   },
 
   productList: {
@@ -119,11 +120,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 4,
     color: 'black',
+    fontFamily: 'Sen-Bold'
   },
 
   productPrice: {
     fontSize: 14,
     color: 'green',
+    fontFamily: 'Poppins'
   },
 });
 
