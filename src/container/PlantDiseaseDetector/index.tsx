@@ -1,8 +1,8 @@
 import { Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import Topbar from 'container/components/TopBar'
 import { moderateScale, moderateVerticalScale, scale } from 'react-native-size-matters'
-import BtnComponent from 'container/Components/Btncomponent'
+import Topbar from 'components/TopBar'
+import BtnComponent from 'components/BtnComponent'
 
 const PlantDiseaseDetector = () => {
   return (
