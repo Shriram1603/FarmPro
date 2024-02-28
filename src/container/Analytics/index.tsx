@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {LineChart} from 'react-native-chart-kit';
+import {BarChart} from 'react-native-chart-kit';
 import {
   View,
   Text,
@@ -9,61 +9,30 @@ import {
 } from 'react-native';
 
 const Analytics = () => {
-  const [temperature, setTemperature] = useState(25);
-  const [humidity, setHumidity] = useState(50);
-  const [potassium, setPotassium] = useState(0);
-  const [phosphorus, setPhosphorus] = useState(0);
-  const [nitrogen, setNitrogen] = useState(0);
+    const data = {
+        labels: ["January", "February", "March", "April", "May", "June"],
+        datasets: [
+          {
+            data: [20, 45, 28, 80, 99, 43]
+          }
+        ]
+      };
 
   return (
     <View style={styles.container}>
-      <View>
-        <Text>Bezier Line Chart</Text>
-        <LineChart
-          data={{
-            labels: ['January', 'February', 'March', 'April', 'May', 'June'],
-            datasets: [
-              {
-                data: [
-                  Math.random() * 100,
-                  Math.random() * 100,
-                  Math.random() * 100,
-                  Math.random() * 100,
-                  Math.random() * 100,
-                  Math.random() * 100,
-                ],
-              },
-            ],
-          }}
-          width={Dimensions.get('window').width} // from react-native
-          height={220}
-          yAxisLabel="$"
-          yAxisSuffix="k"
-          yAxisInterval={1} // optional, defaults to 1
-          chartConfig={{
-            backgroundColor: '#e26a00',
-            backgroundGradientFrom: '#fb8c00',
-            backgroundGradientTo: '#ffa726',
-            decimalPlaces: 2, // optional, defaults to 2dp
-            color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-            labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-            style: {
-              borderRadius: 16,
-            },
-            propsForDots: {
-              r: '6',
-              strokeWidth: '2',
-              stroke: '#ffa726',
-            },
-          }}
-          bezier
-          style={{
-            marginVertical: 8,
-            borderRadius: 16,
-          }}
-        />
-      </View>
-    </View>
+    <Text style={styles.heading}>Farm Pro</Text>
+    <BarChart
+//   style={graphStyle}
+  data={data}
+  width={100}
+  height={220}
+  yAxisLabel="$"
+//   chartConfig={chartConfig}
+flatColor='black'
+  verticalLabelRotation={30}
+/></View>
+    
+  
   );
 };
 
