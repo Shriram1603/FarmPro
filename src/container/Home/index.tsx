@@ -8,8 +8,12 @@ import {
 } from 'react-native';
 import React from 'react';
 import Feed from 'components/Feed';
+import {useSelector} from 'react-redux';
+import Storage from 'data/Storage';
 
 const Home = () => {
+  const predicts = useSelector(state => state.predicts);
+
   return (
     <View style={styles.container}>
       <ScrollView style={{flex: 1}}>
@@ -104,13 +108,18 @@ const Home = () => {
           </TouchableOpacity>
         </View>
         <Text style={styles.topic}>Recomendations</Text>
-        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            marginBottom: 20,
+          }}>
           <TouchableOpacity style={styles.button1}>
             <View style={{marginLeft: 10}}>
               <Text
                 style={{
                   fontSize: 12,
-                  fontWeight: '800',
+                  fontFamily: 'Sen-ExtraBold',
                   marginBottom: 2,
                   color: 'black',
                 }}>
@@ -119,18 +128,18 @@ const Home = () => {
               <Text
                 style={{
                   fontSize: 24,
-                  fontWeight: '900',
+                  fontFamily: 'Sen-Bold',
                   marginBottom: 2,
                   color: 'black',
                 }}>
-                Urea
+                {predicts?.Fertilizer || 68000}
               </Text>
             </View>
             <View style={{marginLeft: 0}}>
               <Text
                 style={{
                   fontSize: 12,
-                  fontWeight: '900',
+                  fontFamily: 'Sen-Bold',
                   marginBottom: 2,
                   color: 'black',
                 }}>
@@ -139,7 +148,52 @@ const Home = () => {
               <Text
                 style={{
                   fontSize: 14,
-                  fontWeight: '900',
+                  fontFamily: 'Sen-Bold',
+                  marginBottom: 2,
+                  color: 'green',
+                }}>
+                Available
+              </Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          <TouchableOpacity style={styles.button1}>
+            <View style={{marginLeft: 10}}>
+              <Text
+                style={{
+                  fontSize: 12,
+                  marginBottom: 2,
+                  color: 'black',
+                  fontFamily: 'Sen-ExtraBold',
+                }}>
+                Storage Recomemended
+              </Text>
+              <Text
+                style={{
+                  fontSize: 20,
+                  marginBottom: 2,
+                  color: 'red',
+                  fontFamily: 'Sen-ExtraBold',
+                }}>
+                {Storage.Barley.temp}
+              </Text>
+            </View>
+            <View style={{marginLeft: 0}}>
+              <Text
+                style={{
+                  fontSize: 12,
+                  marginBottom: 2,
+                  color: 'black',
+                  fontFamily: 'Sen-Bold',
+                }}>
+                Status
+              </Text>
+              <Text
+                style={{
+                  fontSize: 14,
+                  fontFamily: 'Sen-Bold',
+
                   marginBottom: 2,
                   color: 'green',
                 }}>

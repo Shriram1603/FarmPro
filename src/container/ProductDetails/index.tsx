@@ -11,7 +11,8 @@ import Stars from 'react-native-stars';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import BtnComponent from 'components/BtnComponent';
 
-const ProductDetails = ({name,price,imageUrl,details}) => {
+const ProductDetails = ({route}) => {
+  const {name,price,desc,imageUrl} = route.params;
   const [stars, setStars] = useState(0);
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
@@ -19,7 +20,7 @@ const ProductDetails = ({name,price,imageUrl,details}) => {
       {/* <Image source={{ uri: imageUrl }} style={{ width: 200, height: 200 }} /> */}
       <Image
         source={{
-          uri: 'https://media.istockphoto.com/id/184276818/photo/red-apple.jpg?s=612x612&w=0&k=20&c=NvO-bLsG0DJ_7Ii8SSVoKLurzjmV0Qi4eGfn6nW3l5w=',
+          uri: imageUrl,
         }}
         style={{
           height: moderateScale(200),
@@ -35,7 +36,7 @@ const ProductDetails = ({name,price,imageUrl,details}) => {
           fontSize: scale(15),
           color: 'black',
         }}>
-        Organic apple
+        {name}
       </Text>
       <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
         <Text
@@ -46,7 +47,7 @@ const ProductDetails = ({name,price,imageUrl,details}) => {
             fontSize: scale(12),
             color:'black'
           }}>
-          $ price{' '}
+          ₹{price} price
         </Text>
         {/* <Text style={{marginTop:moderateVerticalScale(10),margin:moderateScale(15),fontFamily:"Poppins",fontSize:scale(12)}}>4.5 </Text> */}
         {/* <Staromponent/> */}
@@ -98,7 +99,7 @@ const ProductDetails = ({name,price,imageUrl,details}) => {
           fontSize: scale(15),
           color:'black'
         }}>
-        An apple a day keeps a doctor away.
+        {desc}
       </Text>
       <View
         style={{

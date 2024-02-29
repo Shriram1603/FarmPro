@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import Topbar from 'components/TopBar';
@@ -10,8 +10,14 @@ import {
 } from 'react-native-size-matters';
 import Textipcmp from 'components/TextIpcmp';
 import BtnComponent from 'components/BtnComponent';
+import { useDispatch } from 'react-redux';
+import { setPFertilizer, setRec_Crop, set_Yield } from 'redux/Predicts';
 
 const CropRecommendation = () => {
+  const [weatherData, setWeatherData] = useState(null);
+  const city = 'Irinjalakuda';
+  const apiKey = '5e53d4bb9df3c449c222aa85a07e538e';
+
   const state_indices = {
     Assam: 1,
     Karnataka: 2,
@@ -68,9 +74,26 @@ const CropRecommendation = () => {
   };
   const Soil_indices = {Sandy: 1, Loamy: 2, Black: 3, Red: 4, Clayey: 5};
 
+  useEffect(() => {
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+
+    fetch(apiUrl)
+      .then(response => response.json())
+      .then(data => {
+        setWeatherData(data);
+      })
+      .catch(error => {
+        console.error('Error fetching weather data:', error);
+      });
+  }, [city]);
+
   const [selectedCrop, setSelectedCrop] = useState(null);
   const [selectedState, setSelectedState] = useState(null);
   const [selectedseason, setSelectedseason] = useState(null);
+
+  const [recCrop, setRecCrop] = useState('');
+  const [pYield, setYield] = useState('');
+  const [recFer, setRecFer] = useState('');
 
   const [area, setArea] = useState('');
   const [rainFall, setRainFall] = useState('');
@@ -82,38 +105,115 @@ const CropRecommendation = () => {
   const [potassium, setPotassium] = useState(0);
   const [phosphorus, setPhosphorus] = useState(0);
   const [nitrogen, setNitrogen] = useState(0);
-  const [ph,setPh] = useState(0);
+  const [ph, setPh] = useState(0);
+  const [crop, setCrop] = useState('');
+  let moisture = 30;
+  let soil_type = 2;
+  let crop_type = 2;
 
-  console.log(area);
+  const dispatch = useDispatch();
+
+  console.log('Season', selectedseason);
 
   const pushMetrics = async () => {
-    await fetch(`https://192.168.117.18:8080/predict`, {
+    console.log('Selected', selectedState, selectedseason);
+    await fetch(`http://192.168.22.18:8080/predict`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        nitrogen:nitrogen,
-        phosphorus:phosphorus,
-        potassium:potassium,
-        temperature:temperature,
-        ph:ph,
-
-      
+        nitrogen: nitrogen,
+        phosphorus: phosphorus,
+        potassium: potassium,
+        temperature: temperature,
+        ph: ph,
+        rainfall: rainFall,
+        humidity: humidity,
       }),
     })
       .then(res => res.json())
-      .then(resp => {
-        navigate(Routes.WorkoutStart, {
-          duration: resp['duration'],
-          reps: resp['reps'],
-          sets: resp['sets'],
-          weights: resp['weights'],
-          category: todaysWorkout,
-          currentCategory: workout,
-          selectedLevel: selectedLevel,
-        });
+      .then(async resp => {
+        var crop_name = resp['prediction_text'];
+        console.log("AJJSJFB",crop_name)
+        let id;
+        if (crop_name == 'cotton') id = 5;
+        else if (crop_name == 'maize') id = 10;
+        else if (crop_name == 'rice') id = 17;
+        else if (crop_name == 'blackgram') id = 19;
+        else if (crop_name == 'lentil') id = 48;
+        else if (
+          crop_name == 'apple' ||
+          crop_name == '||ange' ||
+          crop_name == 'pomegranate' ||
+          crop_name == 'watermelon' ||
+          crop_name == 'banana' ||
+          crop_name == 'mango' ||
+          crop_name == 'grapes'
+        )
+          id = 20;
+        else if (crop_name == 'coffee') id = 23;
+        else if (crop_name == 'kidneybeans' || crop_name == 'pigeonpeas')
+          id = 39;
+        else if (crop_name == 'lentil') id = 25;
+        else if (crop_name == 'mungbean' || crop_name == 'mothbeans') id = 19;
+        else if (
+          crop_name == 'chickpea' ||
+          crop_name == 'muskmelon' ||
+          crop_name == 'papaya'
+        )
+          id = 52;
+        else if (crop_name == 'coconut' || crop_name == 'jute') id = 48;
+        console.log('RESP', resp);
+        console.log("ID:",id)
+        await fetch('http://192.168.22.18:8080/predict_yield', {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            crop: id,
+            season: selectedseason,
+            state: selectedState,
+            annual_rainfall: rainFall,
+            fertilizer: fertilizer,
+            pesticide: pesticide,
+            humidity: humidity,
+            area: area,
+          }),
+        })
+          .then(res => res.json())
+          .then(async resp => {
+            console.log('yield', resp);
+            setYield(resp['prediction_text'])
+            await fetch('http://192.168.22.18:8080/recommend_fertilizer', {
+              method: 'POST',
+              headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                temperature: temperature,
+                humidity: humidity,
+                moisture: moisture,
+                soil_type: soil_type,
+                crop_type: crop_type,
+                nitrogen: nitrogen,
+                potassium: potassium,
+                phosphorous: phosphorus,
+              }),
+            })
+              .then(res => res.json())
+              .then(resp => {
+                console.log('REC', resp);
+                setRecFer(resp['recommended_fertilizer'])
+                dispatch(setRec_Crop(crop_name))
+                dispatch(set_Yield(pYield));
+                dispatch(setPFertilizer(resp['recommended_fertilizer']))
+              });
+          });
       });
   };
 
@@ -347,11 +447,14 @@ const CropRecommendation = () => {
           onValueChange={value => setPh(value)}
         />
       </View>
-      <BtnComponent title={'Submit'} onbtnpress={''} />
+      <BtnComponent title={'Submit'} onbtnpress={pushMetrics} />
       <View style={{height: moderateScale(20)}}></View>
     </ScrollView>
   );
 };
+
+export default CropRecommendation;
+
 const styles = StyleSheet.create({
   heading: {
     fontSize: 18,
@@ -383,5 +486,3 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins',
   },
 });
-
-export default CropRecommendation;

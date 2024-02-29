@@ -12,57 +12,18 @@ import {
 } from 'react-native';
 
 const BuyProduct = () => {
-  const [products, setProducts] = useState([
-    {
-      id: '1',
-      name: 'Product 1',
-      price: '$20',
-      imageUrl:
-        'https://ecommercephotographyindia.com/assets/img/gallery/cosmetics-turquoise-bg.jpg',
-    },
-    {
-      id: '2',
-      name: 'Product 2',
-      price: '$30',
-      imageUrl:
-        'https://ecommercephotographyindia.com/assets/img/gallery/cosmetics-turquoise-bg.jpg',
-    },
-    {
-      id: '3',
-      name: 'Product 2',
-      price: '$30',
-      imageUrl:
-        'https://ecommercephotographyindia.com/assets/img/gallery/cosmetics-turquoise-bg.jpg',
-    },
-    {
-      id: '4',
-      name: 'Product 2',
-      price: '$30',
-      imageUrl:
-        'https://ecommercephotographyindia.com/assets/img/gallery/cosmetics-turquoise-bg.jpg',
-    },
-    {
-      id: '5',
-      name: 'Product 2',
-      price: '$30',
-      imageUrl:
-        'https://ecommercephotographyindia.com/assets/img/gallery/cosmetics-turquoise-bg.jpg',
-    },
-    {
-      id: '6',
-      name: 'Product 2',
-      price: '$30',
-      imageUrl:
-        'https://ecommercephotographyindia.com/assets/img/gallery/cosmetics-turquoise-bg.jpg',
-    },
-    // Add more products as needed
-  ]);
+ 
 
   const {navigate} = useNavigation();
 
   const renderProductItem = ({ item }) => (
     <ScrollView>
-      <TouchableOpacity style={styles.productItemContainer} onPress={() => navigate('ProductDetails')}>
+      <TouchableOpacity style={styles.productItemContainer} onPress={() => navigate('ProductDetails',{
+        imageUrl:item.image,
+        name:item.name,
+        price:item.price,
+        desc:item.description
+      })}>
         <Image source={{ uri: item.image }} style={styles.productImage} />
         <Text style={styles.productName}>{item.name}</Text>
         <Text style={styles.productPrice}>{item.price}</Text>
