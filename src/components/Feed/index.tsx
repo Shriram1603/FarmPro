@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 
 const Feed = () => {
-  const {height, width} = Dimensions.get('window');
+  const {height, } = Dimensions.get('window');
   const [newsData, setNewsData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
@@ -60,7 +60,7 @@ const Feed = () => {
       setRefreshing(false);
     });
   };
-  // rgba(186, 178, 235,0.4)
+  
   return (
     <View style={{height: height, padding: 0, backgroundColor: '#F5F5F5'}}>
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
